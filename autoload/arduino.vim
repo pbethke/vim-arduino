@@ -2,10 +2,10 @@ if (exists('g:loaded_arduino_autoload') && g:loaded_arduino_autoload)
     finish
 endif
 let g:loaded_arduino_autoload = 1
-if has('win64') || has('win32') || has('win16')
-  echoerr "vim-arduino does not support windows :("
-  finish
-endif
+" if has('win64') || has('win32') || has('win16')
+"   echoerr "vim-arduino does not support windows :("
+"   finish
+" endif
 let s:HERE = resolve(expand('<sfile>:p:h:h'))
 let s:OS = substitute(system('uname'), '\n', '', '')
 " In neovim, run the shell commands using :terminal to preserve interactivity
@@ -40,7 +40,8 @@ function! arduino#InitializeConfig() abort
     let g:arduino_args = '--verbose-upload'
   endif
   if !exists('g:arduino_serial_cmd')
-    let g:arduino_serial_cmd = 'screen {port} {baud}'
+    " TODO: miniterm from pyserial might be an alternative
+    let g:arduino_serial_cmd = 'screen {port} {baud}' 
   endif
   if !exists('g:arduino_build_path')
     let g:arduino_build_path = '{project_dir}/build'
